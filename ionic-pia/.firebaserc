@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "pia-032": {
+      "hosting": {
+        "app": [
+          "pia-032"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "pia-032"
+  }
+}

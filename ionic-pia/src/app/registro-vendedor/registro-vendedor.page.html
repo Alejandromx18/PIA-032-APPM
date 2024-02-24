@@ -1,0 +1,20 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Registro</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+<form (ngSubmit)="registro()">
+  <ion-list>
+    <ion-item>
+      <ion-label position="stacked">Correo electrónico</ion-label>
+      <ion-input [clearOnEdit]="true"  formControlName="email" placeholder="Ingrese su correo electrónico"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="stacked">Contraseña</ion-label>
+      <ion-input type="password" formControlName="password" placeholder="Ingrese su contraseña"></ion-input>
+    </ion-item>
+  </ion-list>
+  <ion-button type="submit">Registrarse</ion-button>
+</form>
+</ion-content>
