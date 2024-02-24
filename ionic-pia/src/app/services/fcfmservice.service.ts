@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { initializeApp } from 'firebase/app';
 import { environment } from 'src/environments/environment';
 import User from 'src/interfaces/User';
+import {Router } from '@angular/router';
 import {
   CollectionReference,
   DocumentData,
@@ -27,30 +28,27 @@ const dbCloudFirestore = getFirestore(firebaseApp);
   providedIn: 'root',
 })
 export class FCFMServiceService {
-  public isLoged: any = false;
   public logeado: boolean = false;
-  private idUser:string;
+  public isLoged : any = false;
+  auth: Auth;
+
   db = dbCloudFirestore;
   private loggedInSubject: Subject<boolean> = new Subject<boolean>();
 
   
-  constructor(private auth: Auth) {
-    this.idUser = 'nada'
-  }
+  constructor(private router: Router) {
+    this.auth = getAuth(firebaseApp);
+    onAuthStateChanged(this.auth, user => {
+      if(user!= undefined || user != null){
+        this.isLoged = user;
+      }
+    });
+   }
+   tieneSesion(){
+    return this.isLoged;
+   }
 
 
-
-
-  setUserId(userId: string) {
-    this.idUser = userId;
-  }
-
-  getUserId() {
-    return this.idUser;
-  }
-  tieneSesion() {
-    return false
-  }
 
   getLoggedInSubject(){
     return this.loggedInSubject.asObservable();
@@ -62,9 +60,6 @@ export class FCFMServiceService {
   getStateAuth() {
     return this.auth;
   }
-  // addUser(user: User) {
-  //   const userRef = collection(this.firestore, 'users');
-  //   return addDoc(userRef, user);
   // }
   
   register({ email, password }: User) {

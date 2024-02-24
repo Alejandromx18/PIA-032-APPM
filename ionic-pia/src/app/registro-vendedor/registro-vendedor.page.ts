@@ -30,6 +30,8 @@ export class RegistroVendedorPage implements OnInit {
       if (email != null && password != null) {
         this.user.email = email;
         this.user.password = password;
+        console.log('Successfully created user!');
+        this.router.navigate(['/login-vendedor']);
       }
     } else {
       this.formLogin.markAllAsTouched();
